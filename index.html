@@ -15,7 +15,7 @@
       let id = searchParams.get("id");
       const title = searchParams.get("title");
       const subpartId = searchParams.get("subpart_id");
-      const subpartId = searchParams.get("prefix");
+      const prefix = searchParams.get("prefix");
       // TODO: Add env for base path
       window.location.href = `${prefix}bookmarks/${id}/${subpartId}`;
     </script>

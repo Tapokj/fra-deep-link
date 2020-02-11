@@ -17,7 +17,8 @@
       const subpartId = searchParams.get("subpart_id");
       const prefix = searchParams.get("prefix");
       // TODO: Add env for base path
-      window.location.href = `${prefix}bookmarks/${id}/${subpartId}/${title}`;
+      const redirect_url = `${prefix}bookmarks/${id}/${subpartId}/${title}`;
+      window.location.href = redirect_url;
     </script>
   </body>
 </html>

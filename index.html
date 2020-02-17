@@ -9,15 +9,24 @@
   <body>
     <script>
       // token
-
+      let pageIdentity = "bookmarks",
+        redirect_url;
       let url = new URL(window.location.href);
       let searchParams = new URLSearchParams(url.search);
+      // params
       let id = searchParams.get("id");
       const title = searchParams.get("title");
       const subpartId = searchParams.get("subpart_id");
       const prefix = searchParams.get("prefix");
+      redirect_url = `${prefix}${pageIdentity}/${id}/${subpartId}/${title}`;
+      // override params if share to section page
+      if (searchParams.get("isSection")) {
+        pageIdentity = "subparts";
+        redirect_url = `${prefix}/${pageIdentity}/${id}/${title}`;
+      }
+
       // TODO: Add env for base path
-      const redirect_url = `${prefix}bookmarks/${id}/${subpartId}/${title}`;
+      const redirect_url = `${prefix}${pageIdentity}/${id}/${subpartId}/${title}`;
       window.location.href = redirect_url;
     </script>
   </body>

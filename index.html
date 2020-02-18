@@ -25,6 +25,11 @@
         redirect_url = `${prefix}/${pageIdentity}/${id}/${title}`;
       }
 
+      if (searchParams.get("isSubSection")) {
+        pageIdentity = "subsection";
+        redirect_url = `${prefix}/${pageIdentity}/${id}/${title}`;
+      }
+
       // TODO: Add env for base path
       window.location.href = redirect_url;
     </script>

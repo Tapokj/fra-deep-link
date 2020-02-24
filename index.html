@@ -18,16 +18,20 @@
       const title = searchParams.get("title");
       const subpartId = searchParams.get("subpart_id");
       const prefix = searchParams.get("prefix");
-      redirect_url = `${prefix}${pageIdentity}/${id}/${subpartId}/${title}`;
+      redirect_url = `${prefix}${pageIdentity}/${id}/${subpartId}/${transformedTitle}`;
+
+      let transformedTitle = `§ ${title.replace("+", " ")}`;
       // override params if share to section page
       if (searchParams.get("isSection")) {
         pageIdentity = "subparts";
-        redirect_url = `${prefix}/${pageIdentity}/${id}/${title}`;
+        transformedTitle = `${title.replace("+", " ").replace("dash", "-")}`;
+        redirect_url = `${prefix}/${pageIdentity}/${id}/${transformedTitle}`;
       }
 
       if (searchParams.get("isSubSection")) {
         pageIdentity = "subsection";
-        redirect_url = `${prefix}/${pageIdentity}/${id}/${title}`;
+        transformedTitle = `${title.replace("+", " ").replace("emdash", "—")}`;
+        redirect_url = `fra://${pageIdentity}/${id}/${transformedTitle}`;
       }
 
       // TODO: Add env for base path

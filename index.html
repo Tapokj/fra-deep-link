@@ -13,6 +13,7 @@
         redirect_url;
       let url = new URL(window.location.href);
       let searchParams = new URLSearchParams(url.search);
+      let transformedTitle = `§ ${title.replace("+", " ")}`;
       // params
       let id = searchParams.get("id");
       const title = searchParams.get("title");
@@ -20,7 +21,6 @@
       const prefix = searchParams.get("prefix");
       redirect_url = `${prefix}${pageIdentity}/${id}/${subpartId}/${transformedTitle}`;
 
-      let transformedTitle = `§ ${title.replace("+", " ")}`;
       // override params if share to section page
       if (searchParams.get("isSection")) {
         pageIdentity = "subparts";

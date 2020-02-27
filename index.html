@@ -27,11 +27,11 @@
         const urlIosApp =
           "itms://itunes.apple.com/us/app/google-maps-transit-food/id585027354?mt=8";
         if (IS_IOS) {
-          window.location = $("meta[property='al:ios:url']").attr("content");
+          // window.location = $("meta[property='al:ios:url']").attr("content");
           setTimeout(function() {
-            if (!document.webkitHidden) {
-              window.location.href = urlIosApp;
-            }
+            // if (!document.webkitHidden) {
+            window.location.href = urlIosApp;
+            // }
           }, 25);
         }
         if (IS_ANDROID) {

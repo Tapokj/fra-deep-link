@@ -16,70 +16,77 @@
   </head>
   <body>
     <script>
-      const redirectToMobileApp = () => {
-        const IS_IPAD = navigator.userAgent.match(/iPad/i) != null,
-          IS_IPHONE =
-            !IS_IPAD &&
-            (navigator.userAgent.match(/iPhone/i) != null ||
-              navigator.userAgent.match(/iPod/i) != null),
-          IS_IOS = IS_IPAD || IS_IPHONE,
-          IS_ANDROID = !IS_IOS && navigator.userAgent.match(/android/i) != null;
-        const urlIosApp =
-          "itms://itunes.apple.com/us/app/google-maps-transit-food/id585027354?mt=8";
-        if (IS_IOS) {
-          // window.location = $("meta[property='al:ios:url']").attr("content");
-          setTimeout(function() {
-            // if (!document.webkitHidden) {
-            window.location.href = urlIosApp;
-            // }
-          }, 25);
-        }
-        if (IS_ANDROID) {
-          window.location =
-            "intent:/" +
-            $("meta[property='al:android:url']")
-              .attr("content")
-              .split(":/")[1] +
-            "#Intent;package=" +
-            $("meta[property='al:android:package']").attr("content") +
-            ";scheme=" +
-            $("meta[property='al:android:url']")
-              .attr("content")
-              .split(":/")[0] +
-            ";launchFlags=268435456;end;";
-        }
-      };
+      // const redirectToMobileApp = () => {
+      //   const IS_IPAD = navigator.userAgent.match(/iPad/i) != null,
+      //     IS_IPHONE =
+      //       !IS_IPAD &&
+      //       (navigator.userAgent.match(/iPhone/i) != null ||
+      //         navigator.userAgent.match(/iPod/i) != null),
+      //     IS_IOS = IS_IPAD || IS_IPHONE,
+      //     IS_ANDROID = !IS_IOS && navigator.userAgent.match(/android/i) != null;
+      //   const urlIosApp =
+      //     "itms://itunes.apple.com/us/app/google-maps-transit-food/id585027354?mt=8";
+      //   if (IS_IOS) {
+      //     // window.location = $("meta[property='al:ios:url']").attr("content");
+      //     setTimeout(function() {
+      //       // if (!document.webkitHidden) {
+      //       window.location.href = urlIosApp;
+      //       // }
+      //     }, 25);
+      //   }
+      //   if (IS_ANDROID) {
+      //     window.location =
+      //       "intent:/" +
+      //       $("meta[property='al:android:url']")
+      //         .attr("content")
+      //         .split(":/")[1] +
+      //       "#Intent;package=" +
+      //       $("meta[property='al:android:package']").attr("content") +
+      //       ";scheme=" +
+      //       $("meta[property='al:android:url']")
+      //         .attr("content")
+      //         .split(":/")[0] +
+      //       ";launchFlags=268435456;end;";
+      //   }
+      // };
 
-      redirectToMobileApp();
+      // redirectToMobileApp();
 
       // token
-      // let pageIdentity = "bookmarks",
-      //   redirect_url;
-      // let url = new URL(window.location.href);
-      // let searchParams = new URLSearchParams(url.search);
-      // // params
-      // let id = searchParams.get("id");
-      // const title = searchParams.get("title");
-      // const subpartId = searchParams.get("subpart_id");
-      // const prefix = searchParams.get("prefix");
-      // let transformedTitle = `§ ${title.replace("+", " ")}`;
-      // redirect_url = `${prefix}${pageIdentity}/${id}/${subpartId}/${transformedTitle}`;
+      let pageIdentity = "bookmarks",
+        redirect_url;
+      let url = new URL(window.location.href);
+      let searchParams = new URLSearchParams(url.search);
+      // params
+      let id = searchParams.get("id");
+      const title = searchParams.get("title");
+      const subpartId = searchParams.get("subpart_id");
+      const prefix = searchParams.get("prefix");
+      let transformedTitle = `§ ${title.replace("+", " ")}`;
+      redirect_url = `${prefix}${pageIdentity}/${id}/${subpartId}/${transformedTitle}`;
 
-      // // override params if share to section page
-      // if (searchParams.get("isSection")) {
-      //   pageIdentity = "subparts";
-      //   transformedTitle = `${title.replace("+", " ").replace("dash", "-")}`;
-      //   redirect_url = `${prefix}/${pageIdentity}/${id}/${transformedTitle}`;
-      // }
+      // override params if share to section page
+      if (searchParams.get("isSection")) {
+        pageIdentity = "subparts";
+        transformedTitle = `${title.replace("+", " ").replace("dash", "-")}`;
+        redirect_url = `${prefix}/${pageIdentity}/${id}/${transformedTitle}`;
 
-      // if (searchParams.get("isSubSection")) {
-      //   pageIdentity = "subsection";
-      //   transformedTitle = `${title.replace("+", " ").replace("emdash", "—")}`;
-      //   redirect_url = `fra://${pageIdentity}/${id}/${transformedTitle}`;
-      // }
+      }
 
-      // // TODO: Add env for base path
-      // window.location.href = redirect_url;
+      if (searchParams.get("isSubSection")) {
+        pageIdentity = "subsection";
+        transformedTitle = `${title.replace("+", " ").replace("emdash", "—")}`;
+        redirect_url = `fra://${pageIdentity}/${id}/${transformedTitle}`;
+
+      }
+
+      // TODO: Add env for base path
+      window.location.href = redirect_url;
+      
+
+      window.addEventListener('blur', () => {
+        console.log('what happened');
+      })
     </script>
   </body>
 </html>
